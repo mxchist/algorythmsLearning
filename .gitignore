@@ -1,4 +1,7 @@
 Project/OUTPUT.txt
+Project/target/
+Project/.idea
+Project/Project.iml
 
 # Compiled class file
 *.class
