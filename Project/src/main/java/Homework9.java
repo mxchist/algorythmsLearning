@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Homework9 {
 
     public static void main (String ... args) {
         //Excercise 9 - homework -- difficult 27%
