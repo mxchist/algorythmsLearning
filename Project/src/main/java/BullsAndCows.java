@@ -23,14 +23,14 @@ public class BullsAndCows {
     static boolean isThisNumberBool (int n, ArrayList <Character> secondNumberC, int bullsQty) {
         if (n > secondNumberC.size()) return false;
         ArrayList<Character> testNumberC = secondNumberC;
-        testNumberC.set(n, (char)(Integer.parseInt(testNumberC.get(n).toString()) + 1 % 10) );
+        testNumberC.set(n, (char)((Integer.parseInt(testNumberC.get(n).toString()) + 1) % 10) );
         return getBullAndCows(secondNumberC)[0] < bullsQty ? true : false;
     }
 
     static boolean isThisNumberCow (int n, ArrayList<Character> secondNumberC, int cowsQty) {
         if (n > secondNumberC.size()) return false;
         ArrayList<Character> testNumberC = secondNumberC;
-        testNumberC.set(n, (char)(Integer.parseInt(testNumberC.get(n).toString()) + 1 % 10) );
+        testNumberC.set(n, (char)((Integer.parseInt(testNumberC.get(n).toString()) + 1) % 10) );
         return getBullAndCows(secondNumberC)[1] < cowsQty ? true : false;
     }
 
@@ -38,6 +38,7 @@ public class BullsAndCows {
         int firstNumber, secondNumber;
         int cows = 0, bulls = 0;
         int[] getBullAndCows;
+        firstNumberC = new ArrayList<>();
         ArrayList<Character> secondNumberC = new ArrayList<>();
 
         HashMap <Integer, Character> bullsHM = new HashMap<>();
@@ -46,18 +47,12 @@ public class BullsAndCows {
         ArrayList<Character> testNumberC;
 
         Random rand = new Random();
-        do {
-            firstNumber = rand.nextInt();
-        }
-        while (firstNumber < 1000 | firstNumber > 9999);
-        do {
-            secondNumber = rand.nextInt();
-        }
-        while (secondNumber < 1000 | secondNumber > 9999);
+            firstNumber = rand.nextInt(8999) + 1000;
+            secondNumber = rand.nextInt(8999) + 1000;
 
         for (int i = 0 ; i < 3; i++) {
-            firstNumberC.set(i, Integer.toString(firstNumber).toCharArray()[i]);
-            secondNumberC.set(i, Integer.toString(secondNumber).toCharArray()[i]);
+            firstNumberC.add(Integer.toString(firstNumber).toCharArray()[i]);
+            secondNumberC.add(Integer.toString(secondNumber).toCharArray()[i]);
             unknownPosition.add(i);
         }
 
@@ -65,10 +60,10 @@ public class BullsAndCows {
         bulls = getBullAndCows[0];
         cows = getBullAndCows[1];
 
-        testNumberC = secondNumberC;
+        testNumberC = new ArrayList<>(secondNumberC);
 
         for (int n : unknownPosition) {
-            testNumberC.set(n, (char)(Integer.parseInt(testNumberC.get(n).toString()) + 1 % 10) );
+            testNumberC.set(n, (char)((Integer.parseInt(testNumberC.get(n).toString()) + 1) % 10) );
             if (getBullAndCows(testNumberC)[0] > bulls) {
                 bullsHM.put(n, testNumberC.get(n));
             }
@@ -78,7 +73,18 @@ public class BullsAndCows {
             }
         }
 
-        for
+        for (char c : firstNumberC) {
+            System.out.print(c);
+        }
+        System.out.println();
 
+        for (char c : secondNumberC) {
+            System.out.print(c);
+        }
+        System.out.println();
+        for (char c : testNumberC) {
+            System.out.print(c);
+        }
+        System.out.println();
     }
 }
