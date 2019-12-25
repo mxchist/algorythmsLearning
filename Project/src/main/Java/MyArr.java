@@ -51,18 +51,42 @@ public class MyArr {
         System.out.print("\n");
     }
 
-    void change (int x, int y) {
+    boolean isSorted () {
+        for (int i = 0, j = 1; j < array.length; i++, j++) {
+            if (array[i] > array[j]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void change (int x, int y) {
         int m = array[x];
         array[x] = array[y];
         array[y] = m;
     }
 
     void bubbleSort () {
-        for (int n = 0; n < array.length; n++) {
-            for (int i = 0, j = 1; j < array.length; i++, j++) {
+        for (int n = array.length; n> 1; n--) {
+            for (int i = 0, j = 1; j < n; i++, j++) {
                 if (array[i] > array[j]) {
                     change(i, j);
                 }
+            }
+        }
+    }
+
+    void sortSelect() {
+        int min, mark = 0;
+        for (int n = 0; n < array.length; n++) {
+            min = array[n];
+            for (int i = n, j = n+1; j < array.length; i++, j++) {
+                if (array[j] < min) {
+                    min = array[j];
+                    mark = j;
+                }
+                change(n, mark);
             }
         }
     }
