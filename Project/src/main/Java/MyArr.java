@@ -67,8 +67,8 @@ public class MyArr {
         array[y] = m;
     }
 
-    void bubbleSort () {
-        for (int n = array.length; n> 1; n--) {
+    void sortBubble () {
+        for (int n = size; n> 1; n--) {
             for (int i = 0, j = 1; j < n; i++, j++) {
                 if (array[i] > array[j]) {
                     change(i, j);
@@ -79,9 +79,9 @@ public class MyArr {
 
     void sortSelect() {
         int min, mark = 0;
-        for (int n = 0; n < array.length; n++) {
+        for (int n = 0; n < size; n++) {
             min = array[n];
-            for (int i = n, j = n+1; j < array.length; i++, j++) {
+            for (int i = n, j = n+1; j < size; i++, j++) {
                 if (array[j] < min) {
                     min = array[j];
                     mark = j;
@@ -91,6 +91,13 @@ public class MyArr {
         }
     }
 
+    void sortInsert() {
+        for (int n = 1; n < size; n++) {
+            for (int i = n-1, j = n; n > 0 && array[i] > array[j]; i++, j++) {
+                change(i, j);
+            }
+        }
+    }
 
 
 }

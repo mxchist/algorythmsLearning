@@ -19,7 +19,7 @@ public class Main {
         t= System.currentTimeMillis();
 
         array1.showArray();
-        array1.bubbleSort();
+        array1.sortBubble();
         saveTime();
         if (array1.isSorted()) {
             array1.showArray();
@@ -34,6 +34,13 @@ public class Main {
         }
         else return;
 
+        t= System.currentTimeMillis();
+        array3.sortInsert();
+        saveTime();
+        if (array3.isSorted()) {
+            array3.showArray();
+        }
+        else return;
 
 
         for (long t1 : al) {
