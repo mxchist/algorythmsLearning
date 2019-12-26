@@ -57,7 +57,6 @@ public class MyArr {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -79,21 +78,24 @@ public class MyArr {
 
     void sortSelect() {
         int min, mark = 0;
+        boolean needChange;
         for (int n = 0; n < size; n++) {
+            needChange = false;
             min = array[n];
-            for (int i = n, j = n+1; j < size; i++, j++) {
-                if (array[j] < min) {
-                    min = array[j];
-                    mark = j;
+            for (int i = n; i < size; i++) {
+                if (array[i] < min) {
+                    min = array[i];
+                    mark = i;
+                    needChange = true;
                 }
-                change(n, mark);
             }
+            if (needChange == true) change(n, mark);
         }
     }
 
     void sortInsert() {
         for (int n = 1; n < size; n++) {
-            for (int i = n-1, j = n; n > 0 && array[i] > array[j]; i++, j++) {
+            for (int i = n-1, j = n; j > 0 && array[i] > array[j]; i--, j--) {
                 change(i, j);
             }
         }

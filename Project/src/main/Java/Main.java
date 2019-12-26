@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class Main {
     static long t;
-    static ArrayList<Long> al = new ArrayList();
+    static ArrayList<Float> al = new ArrayList();
 
     static void saveTime () {
-        al.add(System.currentTimeMillis() - t);
+        al.add( (System.currentTimeMillis() - t) / 1000f);
         t= System.currentTimeMillis();
     }
 
@@ -27,6 +27,7 @@ public class Main {
         else return;
 
         t= System.currentTimeMillis();
+        array2.showArray();
         array2.sortSelect();
         saveTime();
         if (array2.isSorted()) {
@@ -35,6 +36,7 @@ public class Main {
         else return;
 
         t= System.currentTimeMillis();
+        array3.showArray();
         array3.sortInsert();
         saveTime();
         if (array3.isSorted()) {
@@ -43,8 +45,8 @@ public class Main {
         else return;
 
 
-        for (long t1 : al) {
-            System.out.print(t1);
+        for (float t1 : al) {
+            System.out.printf( "Время сортировки: %6.3f секунд %n", t1);
         }
     }
 }
