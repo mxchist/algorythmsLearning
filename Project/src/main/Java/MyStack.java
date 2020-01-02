@@ -3,46 +3,66 @@
 public class MyStack {
 
     private int maxSize;
-    private int[] stack;
-    private int items;
+    private char[] stack;
     private int marker;
+    private int operationsQty;
 
     public MyStack(int maxSize) {
         if (maxSize == 0) {
             throw new IllegalArgumentException();
         }
         this.maxSize = maxSize;
-        this.stack = new int[maxSize];
-        this.items = 0;
+        this.stack = new char[maxSize];
         this.marker = 0;
+        operationsQty = 1;
+
     }
 
     public boolean isEmpty() {
-        return items == 0;
+        return marker == 0;
     }
     public boolean isFull() {
-        return items == maxSize;
+        return marker == maxSize - 1;
     }
 
-    public void insert (int a) {
+    private void shrinkStack() {
+        if (marker == 0 ) return;
+        maxSize -= maxSize/1.2;
+        char[] newStack = new char[maxSize];
+        System.arraycopy(stack, 0, newStack, 0, marker);
+        stack = newStack;
+
+    }
+    private void enlargeStack() {
+        maxSize += maxSize/10;
+        char[] newStack = new char[maxSize];
+        System.arraycopy(stack, 0, newStack, 0, marker);
+        stack = newStack;
+
+    }
+
+    public void insert (char a) {
         try {
-            stack[marker++] = a;
+            stack[marker] = a;
+            marker++;
         }
         catch (IndexOutOfBoundsException e) {
-            maxSize += maxSize/10;
-            int[] newStack = new int[maxSize];
-            System.arraycopy(stack, 0, newStack, 0, items);
-            stack = newStack;
-            stack[marker] = a;
+            enlargeStack();
+            stack[marker++] = a;
         }
     }
 
-    public int peek() {
+    public char peek() {
         return stack[marker];
     }
 
-    public int remove() {
-        return stack[marker];
+    public char remove() {
+        operationsQty++;
+        if (operationsQty% 1000 == 0 && marker < maxSize / 1.1) {
+            shrinkStack();
+        }
+        return stack[--marker];
+
     }
 
 }
