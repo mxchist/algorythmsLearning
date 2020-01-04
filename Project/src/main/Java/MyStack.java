@@ -13,20 +13,20 @@ public class MyStack {
         }
         this.maxSize = maxSize;
         this.stack = new char[maxSize];
-        this.marker = 0;
+        this.marker = -1;
         operationsQty = 1;
 
     }
 
     public boolean isEmpty() {
-        return marker == 0;
+        return marker == -1;
     }
     public boolean isFull() {
         return marker == maxSize - 1;
     }
 
     private void shrinkStack() {
-        if (marker == 0 ) return;
+        if (marker == -1 ) return;
         maxSize -= maxSize/1.2;
         char[] newStack = new char[maxSize];
         System.arraycopy(stack, 0, newStack, 0, marker);
@@ -41,28 +41,26 @@ public class MyStack {
 
     }
 
-    public void insert (char a) {
+    public void push (char a) {
         try {
-            stack[marker] = a;
-            marker++;
+            stack[++marker] = a;
         }
         catch (IndexOutOfBoundsException e) {
             enlargeStack();
-            stack[marker++] = a;
+            stack[marker] = a;
         }
+    }
+
+    public char pop() {
+        operationsQty++;
+        if (operationsQty% 1000 == 0 && marker < maxSize - maxSize / 1.2) {
+            shrinkStack();
+        }
+        return stack[marker--];
     }
 
     public char peek() {
         return stack[marker];
-    }
-
-    public char remove() {
-        operationsQty++;
-        if (operationsQty% 1000 == 0 && marker < maxSize / 1.1) {
-            shrinkStack();
-        }
-        return stack[--marker];
-
     }
 
 }
