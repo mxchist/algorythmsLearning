@@ -3,70 +3,71 @@
 public class MyDeck<T> {
     private int maxSize;
     private T[] deck;
-    private int leftMarker, begin;
+    private int leftMarker;
     private int rightMarker;
     private int operationsQty;
 
     public MyDeck(int maxSize) {
-        if (maxSize == 0) {
+        if (maxSize < 10) {
             throw new IllegalArgumentException();
         }
         this.maxSize = maxSize;
         this.deck = (T[]) new Object[maxSize];
-        this.leftMarker = begin = maxSize/2;
-        this.rightMarker = this.leftMarker +1;
+        this.rightMarker = maxSize/2;
+        this.leftMarker = this.rightMarker +1;
         operationsQty = 1;
-
     }
 
     public boolean isEmpty() {
         return (
-            leftMarker == begin & rightMarker == begin + 1 && deck[leftMarker] == null && deck[rightMarker] == null
+            this.leftMarker > this.rightMarker
         );
     }
     public boolean isFull() {
-        return leftMarker == -1 || rightMarker == maxSize;
+        return leftMarker == 0 || rightMarker == maxSize -1;
     }
 
-//    private void shrinkStack() {
+//    private void shrinkDeck() {
 //        if (isEmpty() == true || isFull() == true ) return;
 //        maxSize -= maxSize/1.2;
-//        T[] newStack = (T[]) new Object[maxSize];
-//        System.arraycopy(deck, 0, newStack, 0, marker);
-//        deck = newStack;
+//        T[] newDeck = (T[]) new Object[maxSize];
+//        System.arraycopy(deck, 0, newDeck, 0, marker);
+//        deck = newDeck;
 //    }
 
-    private void enlargeStackRight() {
+    private void enlargeDeckRight() {
         maxSize += maxSize/10;
-        T[] newStack = (T[]) new Object[maxSize];
-        System.arraycopy(deck, 0, newStack, 0, rightMarker);
-        deck = newStack;
+        T[] newDeck = (T[]) new Object[maxSize];
+        System.arraycopy(deck, leftMarker, newDeck, leftMarker, rightMarker -leftMarker);
+        deck = newDeck;
     }
 
-    private void enlargeStackLeft() {
+    private void enlargeDeckLeft() {
         int delta = maxSize/10;
         maxSize += delta;
-        T[] newStack = (T[]) new Object[maxSize];
-        System.arraycopy(deck, 0, newStack, delta, rightMarker);
-        deck = newStack;
+        T[] newDeck = (T[]) new Object[maxSize];
+        leftMarker += delta;
+        rightMarker += delta;
+        System.arraycopy(deck, 0, newDeck, delta, rightMarker-leftMarker);
+        deck = newDeck;
     }
 
     public void insertLeft (T a) {
         try {
-            deck[leftMarker--] = a;
+            deck[--leftMarker] = a;
         }
         catch (IndexOutOfBoundsException e) {
-            enlargeStackLeft();
+            enlargeDeckLeft();
             deck[leftMarker] = a;
         }
     }
 
     public void insertRight (T a) {
         try {
-            deck[rightMarker++] = a;
+            deck[++rightMarker] = a;
         }
         catch (IndexOutOfBoundsException e) {
-            enlargeStackRight();
+            enlargeDeckRight();
             deck[rightMarker] = a;
         }
     }
@@ -74,25 +75,25 @@ public class MyDeck<T> {
     public T removeLeft() {
         operationsQty++;
 //        if (operationsQty% 1000 == 0 && marker < maxSize - maxSize / 1.2) {
-//            shrinkStack();
+//            shrinkDeck();
 //        }
-        return deck[++leftMarker];
+        return deck[leftMarker++];
     }
 
     public T removeRight() {
         operationsQty++;
 //        if (operationsQty% 1000 == 0 && marker < maxSize - maxSize / 1.2) {
-//            shrinkStack();
+//            shrinkDeck();
 //        }
-        return deck[--rightMarker];
+        return deck[rightMarker--];
     }
 
     public T peekLeft() {
-        return deck[leftMarker+1];
+        return deck[leftMarker];
     }
 
     public T peekRight() {
-        return deck[leftMarker-1];
+        return deck[leftMarker];
     }
 
 }
