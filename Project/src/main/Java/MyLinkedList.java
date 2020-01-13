@@ -39,6 +39,10 @@ public class MyLinkedList<T> {
         return true;
     }
 
+    public Link getFirst() {
+        return first;
+    }
+
     public Link removeFirst() {
         if (isEmpty()) {
             return null;
