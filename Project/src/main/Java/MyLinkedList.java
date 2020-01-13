@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
+
 public class MyLinkedList<T> {
     public int size;
     public Link first;
@@ -43,6 +45,7 @@ public class MyLinkedList<T> {
         }
         Link tempLink = first;
         first = first.next;
+        size--;
         return tempLink;
     }
 
@@ -59,4 +62,43 @@ public class MyLinkedList<T> {
         }
     }
 
+    public Link find(T value) {
+        if (isEmpty()) {
+            return null;
+        }
+        Link<T> current = first;
+        while (current != null) {
+            while (current != null) {
+                if (current.value.equals(value)) return current;
+                current = current.next;
+            }
+        }
+        return  null;
+    }
+
+    public Link delete(T value) {
+        if (isEmpty()) {
+            return null;
+        }
+
+        Link<T> current = first;
+        if (current.value.equals(value)) {
+            removeFirst();
+            return current;
+        }
+        Link<T> previous = current;
+        current = current.next;
+        while (current != null) {
+            while (current != null) {
+                if (current.value.equals(value)) {
+                    previous.next = current.next;
+                    this.size--;
+                    return current;
+                }
+                previous = current;
+                current = current.next;
+            }
+        }
+        return  null;
+    }
 }
