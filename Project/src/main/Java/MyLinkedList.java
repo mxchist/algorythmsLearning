@@ -68,10 +68,8 @@ public class MyLinkedList<T> {
         }
         Link<T> current = first;
         while (current != null) {
-            while (current != null) {
-                if (current.value.equals(value)) return current;
-                current = current.next;
-            }
+            if (current.value.equals(value)) return current;
+            current = current.next;
         }
         return  null;
     }
@@ -89,15 +87,13 @@ public class MyLinkedList<T> {
         Link<T> previous = current;
         current = current.next;
         while (current != null) {
-            while (current != null) {
-                if (current.value.equals(value)) {
-                    previous.next = current.next;
-                    this.size--;
-                    return current;
-                }
-                previous = current;
-                current = current.next;
+            if (current.value.equals(value)) {
+                previous.next = current.next;
+                this.size--;
+                return current;
             }
+            previous = current;
+            current = current.next;
         }
         return  null;
     }
