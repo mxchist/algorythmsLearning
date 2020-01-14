@@ -31,11 +31,30 @@ class Main {
         myTwoSideLinkedList.displayList();
     }
 
+    static void fillMyLinkedList(MyDoubleLinkedList myDoubleLinkedList) {
+        myDoubleLinkedList.insertFirst("В");
+        myDoubleLinkedList.insertFirst("ходе");
+        myDoubleLinkedList.insertFirst("обсуждения");
+        myDoubleLinkedList.insertFirst("тестов");
+        myDoubleLinkedList.insertFirst("планировщика");
+        myDoubleLinkedList.insertFirst("задач");
+        myDoubleLinkedList.insertFirst(",");
+        myDoubleLinkedList.insertFirst("один ");
+        myDoubleLinkedList.insertFirst("участников");
+        myDoubleLinkedList.insertFirst("дискуссии");
+        myDoubleLinkedList.insertFirst("привёл");
+        myDoubleLinkedList.insertFirst("пример");
+        myDoubleLinkedList.insertFirst("того");
+
+        System.out.println("Весь список");
+        myDoubleLinkedList.displayList();
+    }
+
     public static void main(String... args) {
 
         //Задание 1
         //Односсторонний список
-        System.out.println("Задание 1 \n Односсторонний список");
+        System.out.println("Задание 1 \n Односторонний список");
         MyLinkedList<String> myLinkedList = new MyLinkedList<>();
         fillMyLinkedList(myLinkedList);
 
@@ -58,7 +77,6 @@ class Main {
                 + (myLinkedList.find("нет такого элемента") == null ? "" : myLinkedList.find("нет такого элемента").value)
         );
 
-
         System.out.println("Удаляем элемент");
         System.out.print("конструктор  ");
         myLinkedList.remove("конструктор").displayLink();
@@ -68,7 +86,7 @@ class Main {
         myLinkedList.displayList();
 
         //Двусторонний список
-         System.out.println("\nДвусторонний список");
+        System.out.println("\nДвусторонний список");
         MyTwoSideLinkedList<String> myTwoSideLinkedList = new MyTwoSideLinkedList<>();
         fillMyLinkedList(myTwoSideLinkedList);
 
@@ -84,6 +102,38 @@ class Main {
 
         myTwoSideLinkedList.remove("вывода");
         myTwoSideLinkedList.displayList();
+
+        //Двусвязный список
+        System.out.println("\nДвусвязный список");
+        MyDoubleLinkedList<String> myDoubleLinkedList = new MyDoubleLinkedList<String>();
+        fillMyLinkedList(myDoubleLinkedList);
+
+        System.out.println("Удаляем первый элемент");
+        myDoubleLinkedList.removeFirst();
+        myDoubleLinkedList.displayList();
+
+        System.out.println("Вставляем последний элемент");
+        myDoubleLinkedList.insertLast("что");
+        myDoubleLinkedList.insertLast("несмотря");
+        myDoubleLinkedList.insertLast("на");
+        myDoubleLinkedList.insertLast("заявления");
+        myDoubleLinkedList.insertLast("о");
+        myDoubleLinkedList.insertLast("необходимости ");
+        myDoubleLinkedList.insertLast("сохранения");
+        myDoubleLinkedList.insertLast("совместимости");
+        myDoubleLinkedList.insertLast("при");
+        myDoubleLinkedList.insertLast("разработке");
+        myDoubleLinkedList.insertLast("при");
+        myDoubleLinkedList.insertLast("ядра");
+        myDoubleLinkedList.insertLast("Linux");
+        myDoubleLinkedList.insertLast("недавние");
+        myDoubleLinkedList.insertLast("изменения");
+
+        myDoubleLinkedList.displayList();
+
+        System.out.println("Удаляем элемент \"дискуссии\":");
+        myDoubleLinkedList.remove("дискуссии");
+        myDoubleLinkedList.displayList();
 
     }
 }
