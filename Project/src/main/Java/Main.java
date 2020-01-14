@@ -16,10 +16,12 @@ class Main {
         myLinkedList.displayList();
     }
 
+
     public static void main(String... args) {
 
         //Задание 1
-        System.out.println("Задание 1");
+        //Односсторонний список
+        System.out.println("Задание 1 \n Односсторонний список");
         MyLinkedList<String> myLinkedList = new MyLinkedList<>();
         fillMyLinkedList(myLinkedList);
 
@@ -45,12 +47,14 @@ class Main {
 
         System.out.println("Удаляем элемент");
         System.out.print("конструктор  ");
-        myLinkedList.delete("конструктор").displayLink();
+        myLinkedList.remove("конструктор").displayLink();
         System.out.println();
 
         System.out.println("Весь список");
         myLinkedList.displayList();
 
-
+        //Двусторонний список
+         System.out.println("\nДвусторонний список");
+         
     }
 }

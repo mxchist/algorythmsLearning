@@ -78,7 +78,7 @@ public class MyLinkedList<T> {
         return  null;
     }
 
-    public Link delete(T value) {
+    public Link remove(T value) {
         if (isEmpty()) {
             return null;
         }
