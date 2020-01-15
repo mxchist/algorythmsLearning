@@ -135,5 +135,36 @@ class Main {
         myDoubleLinkedList.remove("дискуссии");
         myDoubleLinkedList.displayList();
 
+
+        //Задание 3
+        System.out.println("Задание 3 \n Реализация стека");
+        MyStack<String> myStack = new MyStack<String>();
+        myStack.push("Линус");
+        myStack.push("Торвальдс");
+        myStack.push("ответил,");
+        myStack.push("что");
+        myStack.push("принцип");
+        myStack.push("не");
+        myStack.push("ломать");
+        myStack.push("пользователей");
+        myStack.push("относится");
+        myStack.push("к");
+        myStack.push("сохранению");
+        myStack.push("внешних");
+        myStack.push("интерфейсов");
+        myStack.push("ядра,");
+        myStack.push("используемых");
+        myStack.push("приложениями");
+        myStack.push("в");
+        myStack.push("пространстве");
+        myStack.push("пользователя,");
+        myStack.push("а");
+        myStack.push("также");
+        myStack.push("самого");
+        myStack.push("ядра");
+
+        while (!myStack.isEmpty()) {
+            System.out.print(" " + myStack.pop().value);
+        }
     }
 }
