@@ -1,4 +1,6 @@
-class MyDoubleLinkedList<T> {
+import java.util.ListIterator;
+
+class MyDoubleLinkedList<T>  {
     public int size;
     public LinkD first;
     public LinkD last;
@@ -56,7 +58,13 @@ class MyDoubleLinkedList<T> {
             return null;
         }
         LinkD tempLink = first;
-        first = first.next;
+        if (size == 1) {
+            first = last = null;
+        }
+        else {
+            first.next.previous = null;
+            first = first.next;
+        }
         size--;
         return tempLink;
     }
@@ -66,7 +74,13 @@ class MyDoubleLinkedList<T> {
             return null;
         }
         LinkD tempLink = last;
-        last = last.previous;
+        if (size == 1) {
+            first = last = null;
+        }
+        else {
+            last.previous.next = null;
+            last = last.previous;
+        }
         size--;
         return tempLink;
     }
