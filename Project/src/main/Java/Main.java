@@ -4,7 +4,7 @@ public class Main {
         System.out.println("Задание 1");
         System.out.println("Простой метод возведения в степень");
 
-        long time = System.currentTimeMillis();
+        long time;
 
         System.out.printf("%1$s", " ");
         for (int j = 2; j < 10; j++) {
@@ -20,7 +20,7 @@ public class Main {
             System.out.println();
         }
 
-        System.out.printf("%n%n" + "Усовершенствованный метод возведения в степень %n");
+        System.out.printf("%n" + "Усовершенствованный метод возведения в степень %n");
         System.out.printf("%1$s", " ");
         for (int j = 2; j < 10; j++) {
             System.out.printf("%1$,15d", j);
@@ -34,9 +34,24 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println("\n\n");
 
+        time = System.currentTimeMillis();
+        System.out.println("Замер времени: простой метод возведения в степень");
+        for (float i = 2; i < 1800; i++) {
+            for (int j = 2; j < 1800; j++) {
+                MyMath.GetPower(i, j);
+            }
+        }
 
+        System.out.println(System.currentTimeMillis() - time);
+        time = System.currentTimeMillis();
+        System.out.println("Замер времени: усовершенствованный метод возведения в степень");
+        for (float i = 2; i < 1800; i++) {
+            for (int j = 2; j < 1800; j++) {
+                MyMath.GetPower(i, j);
+            }
+        }
+        System.out.println(System.currentTimeMillis() - time);
     }
-
-
 }
