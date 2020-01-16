@@ -9,6 +9,21 @@ public class MyLinkedList<T> {
         this.first = null;
     }
 
+    private class Iter implements Iterable<T> {
+        LinkD<T> current;
+
+        public Iter() {
+            current = new LinkD<T>(null);
+            current.next = first;
+        }
+
+        @Override
+        public T next() {
+            current = current.next;
+            return current.value;
+        }
+    }
+
     boolean isEmpty() {
         return first == null ? true : false;
     }
