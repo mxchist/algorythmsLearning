@@ -21,34 +21,43 @@ public class MyDoubleLinkedList<T>  {
         return last;
     }
 
-    public boolean insertFirst(T weight, int price) {
-        Item tempLink = new Item(weight, price);
+    public boolean insertFirst(Item<T> item) {
         if (isEmpty()) {
-            first = tempLink;
-            last = tempLink;
+            first = item;
+            last = item;
         }
         else {
-            tempLink.next = first;
-            first.previous = tempLink;
-            first = tempLink;
+            item.next = first;
+            first.previous = item;
+            first = item;
         }
 
         size++;
         return true;
     }
 
-    public boolean insertLast(T weight, int price) {
+    public boolean insertFirst(T weight, int price) {
+        Item tempLink = new Item(weight, price);
+        return insertFirst(tempLink);
+    }
+
+    public boolean insertLast(Item<T> item) {
         if (isEmpty()) {
-            return insertFirst(weight, price);
+            return insertFirst(item);
         }
         else {
-            Item tempLink = new Item(weight, price);
-            last.next = tempLink;
-            tempLink.previous = last;
-            last = tempLink;
+            last.next = item;
+            item.previous = last;
+            last = item;
         }
         size++;
         return true;
+
+    }
+
+    public boolean insertLast(T weight, int price) {
+        Item tempLink = new Item(weight, price);
+        return insertLast(tempLink);
     }
 
     public Item removeFirst() {
