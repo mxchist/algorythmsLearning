@@ -1,6 +1,7 @@
 import java.lang.System;
 
 public class Main {
+
     private static void fillMyRoom(MyDoubleLinkedList myRoom) {
         myRoom.insertFirst( 0.24347675f, 1);
         myRoom.insertFirst( 0.08593426f, 11);
@@ -162,5 +163,13 @@ public class Main {
         System.out.println("\n\nЗадание 2");
         MyDoubleLinkedList<Float> myRoom = new MyDoubleLinkedList<Float>();
 
+        BackPack bestBackPack;
+
+
+    }
+
+    static void shiftItems(MyDoubleLinkedList<Float> myRoom) {
+        Item tempItem = myRoom.removeLast();
+        myRoom.insertFirst(tempItem);
     }
 }
