@@ -15,7 +15,6 @@ class MyTreeMap<Key extends Comparable<Key>, Value> {
             this.key = key;
             this.value = value;
             this.size = 1;
-            this.level = 0;
         }
     }
 
@@ -170,9 +169,29 @@ class MyTreeMap<Key extends Comparable<Key>, Value> {
     }
 
     public int getLevel() {
-        int minLevel, maxLevel;
-        minLevel = min(root).level;
-        maxLevel = max(root).level;
-        return minLevel < maxLevel ? maxLevel : minLevel;
+        return getLevel(root);
+    }
+
+    public int getLevel(Node node) {
+        int leftLevel = 0, rightLevel = 0;
+        if (node.left != null) {
+            leftLevel = getLevel(node.left);
+        }
+        if (node.right != null) {
+            rightLevel = getLevel(node.right);
+        }
+        return (leftLevel < rightLevel ? rightLevel : leftLevel) + 1;
+    }
+
+    public boolean isBalanced() {
+        if (root.right == null || root.left == null) {
+            if (root.right != null) return getLevel(root.right) <= 1;
+            if (root.left != null) return getLevel(root.left) <= 1;
+            return false;
+        }
+        int leftLevel = getLevel(root.left);
+        int rightLevel = getLevel(root.right);
+
+        return leftLevel - rightLevel <= 1 && leftLevel - rightLevel >= -1;
     }
 }
