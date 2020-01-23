@@ -1,6 +1,6 @@
-﻿import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;
 
-public class MyTreeMap<Key extends Comparable<Key>, Value> {
+class MyTreeMap<Key extends Comparable<Key>, Value> {
     private Node root;
 
     private class Node {
@@ -9,11 +9,13 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         Node left;
         Node right;
         int size;
+        int level;
 
         public Node(Key key, Value value) {
             this.key = key;
             this.value = value;
             this.size = 1;
+            this.level = 0;
         }
     }
 
@@ -80,8 +82,10 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
             node.value = value;
         } else if (cmp < 0) {
             node.left = put(node.left, key, value);
+            node.left.level = node.level + 1;
         } else {
             node.right = put(node.right, key, value);
+            node.right.level = node.level + 1;
         }
         node.size = size(node.left) + size(node.right) + 1;
         return node;
@@ -96,6 +100,13 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
             return node;
         }
         return min(node.left);
+    }
+
+    private Node max(Node node) {
+        if (node.right == null) {
+            return node;
+        }
+        return max(node.right);
     }
 
     public void deleteMin() {
@@ -156,5 +167,12 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         return toString(node.left)
                 + "[" + node.key + "=" + node.value + "], "
                 + toString(node.right);
+    }
+
+    public int getLevel() {
+        int minLevel, maxLevel;
+        minLevel = min(root).level;
+        maxLevel = max(root).level;
+        return minLevel < maxLevel ? maxLevel : minLevel;
     }
 }
