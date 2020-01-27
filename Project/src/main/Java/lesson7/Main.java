@@ -28,10 +28,8 @@ public class Main {
 //        System.out.println(dfp.hasPathTo(8));
 //        System.out.println(dfp.pathTo(4));
 
-        BreadthFirstPath bfp = new BreadthFirstPath(graph, 2);
+        BreadthFirstPath bfp = new BreadthFirstPath(graph, 0);
         System.out.println(bfp.hasPathTo(9));
         System.out.println(bfp.pathTo(9));
-
-
     }
 }
