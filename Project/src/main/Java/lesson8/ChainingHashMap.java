@@ -73,6 +73,19 @@ public class ChainingHashMap<Key, Value> {
         return null;
     }
 
+    public Value delete(Key key) {
+        isKeyNotNull(key);
+        int i = hash(key);
+        for (Node node : st[i]) {
+            if (key.equals(node.key)) {
+                Value temp = node.value;
+                st[i].removeIf(x -> x.key == key);
+                return temp;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
